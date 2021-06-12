@@ -1,6 +1,0 @@
-framework module BeatMaker {
-  umbrella header "BeatMaker-umbrella.h"
-
-  export *
-  module * { export * }
-}
