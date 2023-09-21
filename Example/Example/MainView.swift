@@ -2,21 +2,30 @@
 //  MainView.swift
 //  Example
 //
-//  Created by Winlentia on 12.06.2021.
 //
 
 import SwiftUI
+import YocoSDK
 
 struct MainView: View {
     var body: some View {
         NavigationView{
             VStack {
-                Text("Hello, World!")
-                ContentView()
+                Button("Initialise", action: {
+                    Yoco.initialise()
+                })
+
+                Spacer(minLength: 20)
+
+                Button("Configure", action: {
+                    Yoco.configure(secret: "", loggingEnabled: true, environment: .production)
+                })
+
+                Spacer(minLength: 20)
             }
-            
+
         }.navigationBarTitle("MainView")
-        
+
     }
 }
 

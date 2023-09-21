@@ -1,0 +1,11 @@
+framework module YCGloss {
+  umbrella header "Gloss-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module YCGloss.Swift {
+    header "YCGloss-Swift.h"
+    requires objc
+}

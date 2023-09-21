@@ -1,0 +1,11 @@
+framework module YCReSwift {
+  umbrella header "ReSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module YCReSwift.Swift {
+    header "YCReSwift-Swift.h"
+    requires objc
+}

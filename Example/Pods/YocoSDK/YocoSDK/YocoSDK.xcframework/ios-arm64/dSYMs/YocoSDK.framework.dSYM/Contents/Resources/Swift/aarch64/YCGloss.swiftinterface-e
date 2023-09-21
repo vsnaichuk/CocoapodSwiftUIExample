@@ -1,0 +1,182 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target arm64-apple-ios8.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name YCGloss
+import Foundation
+import Swift
+@_exported import YCGloss
+public struct Decoder {
+  public static var logger: YCGloss.Logger
+  public static func decode<T>(key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter, logger: YCGloss.Logger = logger) -> (YCGloss.JSON) -> T?
+  public static func decode(dateForKey key: Swift.String, dateFormatter: Foundation.DateFormatter, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> Foundation.Date?
+  public static func decode(dateArrayForKey key: Swift.String, dateFormatter: Foundation.DateFormatter, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> [Foundation.Date]?
+  public static func decode(dateISO8601ForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> Foundation.Date?
+  public static func decode(dateISO8601ArrayForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> [Foundation.Date]?
+  public static func decode<T>(decodableForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> T? where T : YCGloss.JSONDecodable
+  public static func decode<T>(decodableArrayForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> [T]? where T : YCGloss.JSONDecodable
+  public static func decode<T>(decodableDictionaryForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> [Swift.String : T]? where T : YCGloss.JSONDecodable
+  public static func decode<T>(decodableDictionaryForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> [Swift.String : [T]]? where T : YCGloss.JSONDecodable
+  public static func decode<T>(enumForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> T? where T : Swift.RawRepresentable
+  public static func decode<T>(enumArrayForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> [T]? where T : Swift.RawRepresentable
+  public static func decode(int32ForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> Swift.Int32?
+  public static func decode(int32ArrayForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> [Swift.Int32]?
+  public static func decode(uint32ForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> Swift.UInt32?
+  public static func decode(uint32ArrayForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> [Swift.UInt32]?
+  public static func decode(int64ForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> Swift.Int64?
+  public static func decode(int64ArrayForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> [Swift.Int64]?
+  public static func decode(uint64ForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> Swift.UInt64?
+  public static func decode(uint64ArrayForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> [Swift.UInt64]?
+  public static func decode(urlForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> Foundation.URL?
+  public static func decode(urlArrayForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> [Foundation.URL]?
+  public static func decode(uuidForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> Foundation.UUID?
+  public static func decode(uuidArrayForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> [Foundation.UUID]?
+  public static func decode(doubleForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> Swift.Double?
+  public static func decode(doubleArrayForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> [Swift.Double]?
+  public static func decode(decimalForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> Foundation.Decimal?
+  public static func decode(decimalArrayForKey key: Swift.String, keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> (YCGloss.JSON) -> [Foundation.Decimal]?
+}
+public struct Encoder {
+  public static func encode<T>(key: Swift.String) -> (T?) -> YCGloss.JSON?
+  public static func encode<T>(arrayForKey key: Swift.String) -> ([T]?) -> YCGloss.JSON?
+  public static func encode(dateForKey key: Swift.String, dateFormatter: Foundation.DateFormatter) -> (Foundation.Date?) -> YCGloss.JSON?
+  public static func encode(dateArrayForKey key: Swift.String, dateFormatter: Foundation.DateFormatter) -> ([Foundation.Date]?) -> YCGloss.JSON?
+  public static func encode(dateISO8601ForKey key: Swift.String) -> (Foundation.Date?) -> YCGloss.JSON?
+  public static func encode(dateISO8601ArrayForKey key: Swift.String) -> ([Foundation.Date]?) -> YCGloss.JSON?
+  public static func encode<T>(encodableForKey key: Swift.String) -> (T?) -> YCGloss.JSON? where T : YCGloss.JSONEncodable
+  public static func encode<T>(encodableArrayForKey key: Swift.String) -> ([T]?) -> YCGloss.JSON? where T : YCGloss.JSONEncodable
+  public static func encode<T>(encodableDictionaryForKey key: Swift.String) -> ([Swift.String : T]?) -> YCGloss.JSON? where T : YCGloss.JSONEncodable
+  public static func encode<T>(encodableDictionaryForKey key: Swift.String) -> ([Swift.String : [T]]?) -> YCGloss.JSON? where T : YCGloss.JSONEncodable
+  public static func encode<T>(enumForKey key: Swift.String) -> (T?) -> YCGloss.JSON? where T : Swift.RawRepresentable
+  public static func encode<T>(enumArrayForKey key: Swift.String) -> ([T]?) -> YCGloss.JSON? where T : Swift.RawRepresentable
+  public static func encode(int32ForKey key: Swift.String) -> (Swift.Int32?) -> YCGloss.JSON?
+  public static func encode(int32ArrayForKey key: Swift.String) -> ([Swift.Int32]?) -> YCGloss.JSON?
+  public static func encode(uint32ForKey key: Swift.String) -> (Swift.UInt32?) -> YCGloss.JSON?
+  public static func encode(uint32ArrayForKey key: Swift.String) -> ([Swift.UInt32]?) -> YCGloss.JSON?
+  public static func encode(int64ForKey key: Swift.String) -> (Swift.Int64?) -> YCGloss.JSON?
+  public static func encode(int64ArrayForKey key: Swift.String) -> ([Swift.Int64]?) -> YCGloss.JSON?
+  public static func encode(uint64ForKey key: Swift.String) -> (Swift.UInt64?) -> YCGloss.JSON?
+  public static func encode(uint64ArrayForKey key: Swift.String) -> ([Swift.UInt64]?) -> YCGloss.JSON?
+  public static func encode(urlForKey key: Swift.String) -> (Foundation.URL?) -> YCGloss.JSON?
+  public static func encode(uuidForKey key: Swift.String) -> (Foundation.UUID?) -> YCGloss.JSON?
+  public static func encode(doubleForKey key: Swift.String) -> (Swift.Double?) -> YCGloss.JSON?
+  public static func encode(doubleArrayForKey key: Swift.String) -> ([Swift.Double]?) -> YCGloss.JSON?
+  public static func encode(decimalForKey key: Swift.String) -> (Foundation.Decimal?) -> YCGloss.JSON?
+  public static func encode(decimalArrayForKey key: Swift.String) -> ([Foundation.Decimal]?) -> YCGloss.JSON?
+}
+extension Array where Element : Swift.Decodable, Element : YCGloss.JSONDecodable {
+  public static func from(decodableJSONArray jsonArray: [YCGloss.JSON], jsonDecoder: Foundation.JSONDecoder = JSONDecoder(), serializer: YCGloss.JSONSerializer = GlossJSONSerializer(), options: Foundation.JSONSerialization.WritingOptions? = nil, logger: YCGloss.Logger = GlossLogger()) -> [Element]?
+  public static func from(decodableData data: Foundation.Data, jsonDecoder: Foundation.JSONDecoder = JSONDecoder(), serializer: YCGloss.JSONSerializer = GlossJSONSerializer(), options: Foundation.JSONSerialization.ReadingOptions = .mutableContainers, logger: YCGloss.GlossLogger = GlossLogger()) -> [Element]?
+}
+extension Array where Element : Swift.Encodable, Element : YCGloss.JSONEncodable {
+  public func toEncodableJSONArray(jsonEncoder: Foundation.JSONEncoder = JSONEncoder(), serializer: YCGloss.JSONSerializer = GlossJSONSerializer(), options: Foundation.JSONSerialization.ReadingOptions = .mutableContainers, logger: YCGloss.Logger = GlossLogger()) -> [YCGloss.JSON]?
+}
+extension Array where Element : YCGloss.JSONDecodable {
+  public static func from(jsonArray: [YCGloss.JSON]) -> [Element]?
+  public static func from(data: Foundation.Data, serializer: YCGloss.JSONSerializer = GlossJSONSerializer(), options: Foundation.JSONSerialization.ReadingOptions = .mutableContainers) -> [Element]?
+}
+extension Array where Element : YCGloss.JSONEncodable {
+  public func toJSONArray() -> [YCGloss.JSON]?
+}
+extension JSONDecodable {
+  public init?(data: Foundation.Data, serializer: YCGloss.JSONSerializer = GlossJSONSerializer(), options: Foundation.JSONSerialization.ReadingOptions = .mutableContainers)
+  public static func from<T>(decodableData data: Foundation.Data, jsonDecoder: Foundation.JSONDecoder = JSONDecoder(), serializer: YCGloss.JSONSerializer = GlossJSONSerializer(), options: Foundation.JSONSerialization.ReadingOptions = .mutableContainers, logger: YCGloss.Logger = GlossLogger()) -> T? where T : Swift.Decodable, T : YCGloss.JSONDecodable
+  public static func from<T>(decodableJSON json: YCGloss.JSON, jsonDecoder: Foundation.JSONDecoder = JSONDecoder(), serializer: YCGloss.JSONSerializer = GlossJSONSerializer(), options: Foundation.JSONSerialization.WritingOptions? = nil, logger: YCGloss.Logger = GlossLogger()) -> T? where T : Swift.Decodable, T : YCGloss.JSONDecodable
+}
+extension Dictionary {
+  public func valueForKeyPath(keyPath: Swift.String, withDelimiter delimiter: Swift.String = GlossKeyPathDelimiter, logger: YCGloss.Logger = GlossLogger()) -> Any?
+}
+extension JSONEncodable where Self : Swift.Encodable {
+  public func toEncodableJSON(jsonEncoder: Foundation.JSONEncoder = JSONEncoder(), serializer: YCGloss.JSONSerializer = GlossJSONSerializer(), options: Foundation.JSONSerialization.ReadingOptions = .mutableContainers, logger: YCGloss.Logger = GlossLogger()) -> YCGloss.JSON?
+}
+public typealias JSON = [Swift.String : Any]
+public enum GlossError : Swift.Error {
+  case decodableMigrationUnimplemented(context: Swift.String)
+  case encodableMigrationUnimplemented(context: Swift.String)
+}
+public protocol Glossy : YCGloss.JSONDecodable, YCGloss.JSONEncodable {
+}
+public protocol JSONDecodable {
+  init?(json: YCGloss.JSON)
+}
+public protocol JSONEncodable {
+  func toJSON() -> YCGloss.JSON?
+}
+public var GlossDateFormatterISO8601: Foundation.DateFormatter {
+  get
+}
+public protocol JSONSerializer {
+  func json(from data: Foundation.Data, options: Foundation.JSONSerialization.ReadingOptions) -> YCGloss.JSON?
+  func jsonArray(from data: Foundation.Data, options: Foundation.JSONSerialization.ReadingOptions) -> [YCGloss.JSON]?
+  func data(from json: YCGloss.JSON, options: Foundation.JSONSerialization.WritingOptions?) -> Foundation.Data?
+}
+public struct GlossJSONSerializer : YCGloss.JSONSerializer {
+  public init()
+  public func json(from data: Foundation.Data, options: Foundation.JSONSerialization.ReadingOptions) -> YCGloss.JSON?
+  public func jsonArray(from data: Foundation.Data, options: Foundation.JSONSerialization.ReadingOptions) -> [YCGloss.JSON]?
+  public func data(from json: YCGloss.JSON, options: Foundation.JSONSerialization.WritingOptions?) -> Foundation.Data?
+}
+public protocol Logger {
+  func log(message: Swift.String)
+}
+public struct GlossLogger : YCGloss.Logger {
+  public init()
+  public func log(message: Swift.String)
+}
+public var GlossKeyPathDelimiter: Swift.String {
+  get
+}
+public func jsonify(_ array: [YCGloss.JSON?], keyPathDelimiter: Swift.String = GlossKeyPathDelimiter) -> YCGloss.JSON?
+precedencegroup DecodingPrecedence {
+  associativity: left
+  higherThan: CastingPrecedence
+}
+infix operator <~~ : DecodingPrecedence
+public func <~~ <T>(key: Swift.String, json: YCGloss.JSON) -> T?
+public func <~~ <T>(key: Swift.String, json: YCGloss.JSON) -> T? where T : YCGloss.JSONDecodable
+public func <~~ <T>(key: Swift.String, json: YCGloss.JSON) -> [T]? where T : YCGloss.JSONDecodable
+public func <~~ <T>(key: Swift.String, json: YCGloss.JSON) -> [Swift.String : T]? where T : YCGloss.JSONDecodable
+public func <~~ <T>(key: Swift.String, json: YCGloss.JSON) -> [Swift.String : [T]]? where T : YCGloss.JSONDecodable
+public func <~~ <T>(key: Swift.String, json: YCGloss.JSON) -> T? where T : Swift.RawRepresentable
+public func <~~ <T>(key: Swift.String, json: YCGloss.JSON) -> [T]? where T : Swift.RawRepresentable
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> Swift.Int32?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> [Swift.Int32]?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> Swift.UInt32?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> [Swift.UInt32]?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> Swift.Int64?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> [Swift.Int64]?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> Swift.UInt64?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> [Swift.UInt64]?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> Foundation.URL?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> [Foundation.URL]?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> Foundation.UUID?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> [Foundation.UUID]?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> Swift.Double?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> [Swift.Double]?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> Foundation.Decimal?
+public func <~~ (key: Swift.String, json: YCGloss.JSON) -> [Foundation.Decimal]?
+precedencegroup EncodingPrecedence {
+  associativity: left
+  higherThan: CastingPrecedence
+}
+infix operator ~~> : EncodingPrecedence
+public func ~~> <T>(key: Swift.String, property: T?) -> YCGloss.JSON?
+public func ~~> <T>(key: Swift.String, property: [T]?) -> YCGloss.JSON?
+public func ~~> <T>(key: Swift.String, property: T?) -> YCGloss.JSON? where T : YCGloss.JSONEncodable
+public func ~~> <T>(key: Swift.String, property: [T]?) -> YCGloss.JSON? where T : YCGloss.JSONEncodable
+public func ~~> <T>(key: Swift.String, property: [Swift.String : T]?) -> YCGloss.JSON? where T : YCGloss.JSONEncodable
+public func ~~> <T>(key: Swift.String, property: [Swift.String : [T]]?) -> YCGloss.JSON? where T : YCGloss.JSONEncodable
+public func ~~> <T>(key: Swift.String, property: T?) -> YCGloss.JSON? where T : Swift.RawRepresentable
+public func ~~> <T>(key: Swift.String, property: [T]?) -> YCGloss.JSON? where T : Swift.RawRepresentable
+public func ~~> (key: Swift.String, property: Swift.Int32?) -> YCGloss.JSON?
+public func ~~> (key: Swift.String, property: [Swift.Int32]?) -> YCGloss.JSON?
+public func ~~> (key: Swift.String, property: Swift.UInt32?) -> YCGloss.JSON?
+public func ~~> (key: Swift.String, property: [Swift.UInt32]?) -> YCGloss.JSON?
+public func ~~> (key: Swift.String, property: Swift.Int64?) -> YCGloss.JSON?
+public func ~~> (key: Swift.String, property: [Swift.Int64]?) -> YCGloss.JSON?
+public func ~~> (key: Swift.String, property: Swift.UInt64?) -> YCGloss.JSON?
+public func ~~> (key: Swift.String, property: [Swift.UInt64]?) -> YCGloss.JSON?
+public func ~~> (key: Swift.String, property: Foundation.URL?) -> YCGloss.JSON?
+public func ~~> (key: Swift.String, property: Foundation.UUID?) -> YCGloss.JSON?
+public func ~~> (key: Swift.String, property: Swift.Double?) -> YCGloss.JSON?
+public func ~~> (key: Swift.String, property: [Swift.Double]?) -> YCGloss.JSON?
+public func ~~> (key: Swift.String, property: Foundation.Decimal?) -> YCGloss.JSON?
+public func ~~> (key: Swift.String, property: [Foundation.Decimal]?) -> YCGloss.JSON?

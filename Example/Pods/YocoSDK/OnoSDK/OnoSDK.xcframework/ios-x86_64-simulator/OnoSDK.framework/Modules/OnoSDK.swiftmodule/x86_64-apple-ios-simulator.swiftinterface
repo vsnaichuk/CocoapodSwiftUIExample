@@ -1,0 +1,129 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
+// swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OnoSDK
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import CommonCrypto
+import CoreBluetooth
+import Foundation
+import Ono
+@_exported import OnoSDK
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+@_hasMissingDesignatedInitializers public class Crypto {
+  public static func encrypt(message: Swift.String, secretKey: Swift.String) -> Swift.String?
+  public static func decrypt(encryptedText: Swift.String, secretKey: Swift.String) -> Swift.String?
+  @objc deinit
+}
+extension CoreBluetooth.CBService {
+  public func characteristic(withUuid uuid: CoreBluetooth.CBUUID) -> CoreBluetooth.CBCharacteristic?
+}
+public struct DatecsTerminalInfo : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public class IOSLocalize : Ono.ITranslate, Ono.IFormat {
+  public init()
+  public func string(key: Swift.String, locale: Swift.String?, defaultString: Swift.String) -> Swift.String
+  @objc public func string(key: Swift.String, locale: Swift.String?, defaultString: Swift.String, args: [Any]?) -> Swift.String
+  @objc public func currencyAndAmount(amount: Any, locale: Swift.String?, currency: Ono.OnoCurrency, defaultValue: Swift.String) -> Swift.String
+  @objc public func date(timeSinceInterval1970: Swift.Int64, locale: Swift.String?, format: Ono.IFormatOnoDateFormat, defaultValue: Swift.String) -> Swift.String
+  @objc public func number(number: Any, locale: Swift.String?, format: Swift.String, defaultValue: Swift.String) -> Swift.String
+  @objc deinit
+}
+public class IOSLogger : Ono.ILogger {
+  public init()
+  @objc public func logMessage(logLevel: Ono.LogLevel, message: Swift.String, metadata: [Swift.AnyHashable : Any]?, component: Swift.String?)
+  @objc public func uploadLogFile(clientBillIdentifier: Swift.String, minLogLevel: Swift.Int32, excludeComponents: Ono.KotlinArray<Foundation.NSString>?, excludeRegex: Swift.String?) -> Swift.Bool
+  @objc public func uploadLogsInRange(startDate: Swift.Int64, endDate: Swift.Int64, logLevel: Swift.Int32)
+  @objc public func setMetaValue(key: Swift.String, value: Any) -> Any
+  @objc public func setClientBillIdentifier(clientBillIdentifier: Swift.String)
+  @objc public func checkExists(clientBillIdentifier: Swift.String) -> Swift.Bool
+  @objc public func doInternalLog(logLevel: Ono.LogLevel, tag: Swift.String, message: Swift.String)
+  @objc public func getGlobalMetadata() -> [Swift.String : Any]
+  @objc public func getCurrentTimeMillis() -> Swift.Int64
+  @objc public func getConnectionInfo() -> Ono.OnoNetworkConnectionInfo
+  @objc public func linkPreFirstTransactionLogsTo(clientBillIdentifier: Swift.String)
+  @objc public func currentClientBillIdentifier() -> Swift.String?
+  @objc public func uploadCurrentBillIdLog(logLevel: Ono.LogLevel)
+  @objc public func clearAll()
+  @objc deinit
+}
+public class IOSPersistentStorage : Ono.IPersistentStorage {
+  @objc public var expiry: Ono.KotlinLong?
+  public init(expiry: Swift.Int64)
+  @objc public func get(key: Swift.String) -> Swift.String?
+  @objc public func keys() -> Swift.Set<Swift.String>
+  @objc public func put(key: Swift.String, value: Swift.String)
+  @objc public func remove(key: Swift.String)
+  @objc public func timestamp(key: Swift.String) -> Ono.KotlinLong?
+  @objc public func clearExpired()
+  @objc deinit
+}
+public class IOSTimerFactory : Ono.ITimerFactory {
+  public init()
+  @objc public func startTimer(runAfter: Swift.Int64, block: @escaping () -> Swift.Void) -> any Ono.ITimerJob
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class IOSTimerJob : Ono.ITimerJob {
+  @objc public func cancel()
+  @objc deinit
+}
+extension Foundation.Data {
+  public func toKotlinByteArray() -> Ono.KotlinByteArray
+}
+extension Swift.Bool {
+  public func toKotlinBoolean() -> Ono.KotlinBoolean
+}
+extension Swift.Int {
+  public func toKotlinInt() -> Ono.KotlinInt
+}
+extension Ono.KotlinByteArray {
+  public func toData() -> Foundation.Data
+}
+extension Ono.OnoSDK {
+  public func initializeSdk(environment: Ono.Environment = Environment.production, doTransactionLogging: Swift.Bool = true)
+  public func defaultInitialze(doTransactionLogging: Swift.Bool = true)
+}
+extension Ono.Logger {
+  public func i(tag: Swift.String, message: Swift.String)
+  public func i(tag: Swift.String, message: Swift.String, metadata: [Swift.String : Any]?)
+  public func d(tag: Swift.String, message: Swift.String)
+  public func d(tag: Swift.String, message: Swift.String, metadata: [Swift.String : Any]?)
+  public func e(tag: Swift.String, message: Swift.String)
+  public func e(tag: Swift.String, message: Swift.String, metadata: [Swift.String : Any]?)
+  public func w(tag: Swift.String, message: Swift.String)
+  public func w(tag: Swift.String, message: Swift.String, metadata: [Swift.String : Any]?)
+  public func t(tag: Swift.String, message: Swift.String)
+  public func t(tag: Swift.String, message: Swift.String, metadata: [Swift.String : Any]?)
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class SecureDefaults : ObjectiveC.NSObject {
+  @objc public static func standard() -> SecureDefaults
+  @objc public func dictionaryRepresentation() -> [Swift.String : Any]
+  @objc public func removeAll()
+  @objc public func removeObject(forKey defaultName: Swift.String)
+  @objc(setString:forKey:) public func set(_ value: Swift.String, forKey: Swift.String)
+  @objc(setBool:forKey:) public func set(_ value: Swift.Bool, forKey: Swift.String)
+  @objc(setInt:forKey:) public func set(_ value: Swift.Int, forKey: Swift.String)
+  @objc(setFloat:forKey:) public func set(_ value: Swift.Float, forKey: Swift.String)
+  @objc(setDouble:forKey:) public func set(_ value: Swift.Double, forKey: Swift.String)
+  @objc(setData:forKey:) public func set(_ value: Foundation.Data, forKey: Swift.String)
+  @objc public func string(forKey: Swift.String) -> Swift.String?
+  public func bool(forKey: Swift.String) -> Swift.Bool?
+  public func integer(forKey: Swift.String) -> Swift.Int?
+  public func float(forKey: Swift.String) -> Swift.Float?
+  public func double(forKey: Swift.String) -> Swift.Double?
+  @objc public func data(forKey: Swift.String) -> Foundation.Data?
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class SegmentService : Ono.ISegmentService {
+  @objc public func trackEvent(eventName: Swift.String, data: [Swift.String : Swift.String])
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class TLVDecoderService : Ono.TLVDecoderServiceProtocol {
+  @objc override dynamic public func extractHexStringFromTLV(tlv: Swift.String, tag: Swift.String, asAscii: Ono.KotlinBoolean?) -> Swift.String?
+  @objc override dynamic public func extractBinaryStringListFromTLV(tlv: Swift.String, tag: Swift.String) -> [Swift.String]?
+  @objc override dynamic public init()
+  @objc deinit
+}

@@ -1,0 +1,11 @@
+framework module YCLottie {
+  umbrella header "lottie-ios-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module YCLottie.Swift {
+    header "YCLottie-Swift.h"
+    requires objc
+}

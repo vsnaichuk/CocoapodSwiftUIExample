@@ -1,0 +1,98 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target x86_64-apple-ios8.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name YCReSwift
+import Foundation
+import Swift
+@_exported import YCReSwift
+public protocol Action {
+}
+public struct ReSwiftInit : YCReSwift.Action {
+}
+public protocol Coding {
+  init?(dictionary: [Swift.String : Swift.AnyObject])
+  var dictionaryRepresentation: [Swift.String : Swift.AnyObject] { get }
+}
+public protocol DispatchingStoreType {
+  func dispatch(_ action: YCReSwift.Action)
+}
+public typealias DispatchFunction = (YCReSwift.Action) -> Swift.Void
+public typealias Middleware<State> = (@escaping YCReSwift.DispatchFunction, @escaping () -> State?) -> (@escaping YCReSwift.DispatchFunction) -> YCReSwift.DispatchFunction
+public typealias Reducer<ReducerStateType> = (YCReSwift.Action, ReducerStateType?) -> ReducerStateType
+public protocol StateType {
+}
+open class Store<State> : YCReSwift.StoreType where State : YCReSwift.StateType {
+  public var state: State! {
+    get
+  }
+  public var dispatchFunction: YCReSwift.DispatchFunction! {
+    get
+    set
+  }
+  public var middleware: [YCReSwift.Middleware<State>] {
+    get
+    set
+  }
+  required public init(reducer: @escaping YCReSwift.Reducer<State>, state: State?, middleware: [YCReSwift.Middleware<State>] = [], automaticallySkipsRepeats: Swift.Bool = true)
+  open func subscribe<S>(_ subscriber: S) where State == S.StoreSubscriberStateType, S : YCReSwift.StoreSubscriber
+  open func subscribe<SelectedState, S>(_ subscriber: S, transform: ((YCReSwift.Subscription<State>) -> YCReSwift.Subscription<SelectedState>)?) where SelectedState == S.StoreSubscriberStateType, S : YCReSwift.StoreSubscriber
+  open func unsubscribe(_ subscriber: YCReSwift.AnyStoreSubscriber)
+  open func _defaultDispatch(action: YCReSwift.Action)
+  open func dispatch(_ action: YCReSwift.Action)
+  @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
+  open func dispatch(_ actionCreatorProvider: @escaping YCReSwift.Store<State>.ActionCreator)
+  @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
+  open func dispatch(_ asyncActionCreatorProvider: @escaping YCReSwift.Store<State>.AsyncActionCreator)
+  @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
+  open func dispatch(_ actionCreatorProvider: @escaping YCReSwift.Store<State>.AsyncActionCreator, callback: YCReSwift.Store<State>.DispatchCallback?)
+  public typealias DispatchCallback = (State) -> Swift.Void
+  @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
+  public typealias ActionCreator = (State, YCReSwift.Store<State>) -> YCReSwift.Action?
+  @available(*, deprecated, message: "Deprecated in favor of https://github.com/ReSwift/ReSwift-Thunk")
+  public typealias AsyncActionCreator = (State, YCReSwift.Store<State>, @escaping (((State, YCReSwift.Store<State>) -> YCReSwift.Action?) -> Swift.Void)) -> Swift.Void
+  @objc deinit
+}
+extension Store {
+  open func subscribe<SelectedState, S>(_ subscriber: S, transform: ((YCReSwift.Subscription<State>) -> YCReSwift.Subscription<SelectedState>)?) where SelectedState : Swift.Equatable, SelectedState == S.StoreSubscriberStateType, S : YCReSwift.StoreSubscriber
+}
+extension Store where State : Swift.Equatable {
+  open func subscribe<S>(_ subscriber: S) where State == S.StoreSubscriberStateType, S : YCReSwift.StoreSubscriber
+}
+public protocol AnyStoreSubscriber : AnyObject {
+  func _newState(state: Any)
+}
+public protocol StoreSubscriber : YCReSwift.AnyStoreSubscriber {
+  associatedtype StoreSubscriberStateType
+  func newState(state: Self.StoreSubscriberStateType)
+}
+extension StoreSubscriber {
+  public func _newState(state: Any)
+}
+public protocol StoreType : YCReSwift.DispatchingStoreType {
+  associatedtype State : YCReSwift.StateType
+  var state: Self.State! { get }
+  var dispatchFunction: YCReSwift.DispatchFunction! { get }
+  func subscribe<S>(_ subscriber: S) where S : YCReSwift.StoreSubscriber, Self.State == S.StoreSubscriberStateType
+  func subscribe<SelectedState, S>(_ subscriber: S, transform: ((YCReSwift.Subscription<Self.State>) -> YCReSwift.Subscription<SelectedState>)?) where SelectedState == S.StoreSubscriberStateType, S : YCReSwift.StoreSubscriber
+  func unsubscribe(_ subscriber: YCReSwift.AnyStoreSubscriber)
+  func dispatch(_ actionCreator: Self.ActionCreator)
+  func dispatch(_ asyncActionCreator: Self.AsyncActionCreator)
+  func dispatch(_ asyncActionCreator: Self.AsyncActionCreator, callback: Self.DispatchCallback?)
+  associatedtype DispatchCallback = (Self.State) -> Swift.Void
+  associatedtype ActionCreator = (Self.State, YCReSwift.StoreType) -> YCReSwift.Action?
+  associatedtype AsyncActionCreator = (Self.State, YCReSwift.StoreType, (Self.ActionCreator) -> Swift.Void) -> Swift.Void
+}
+@_hasMissingDesignatedInitializers public class Subscription<State> {
+  public init(sink: @escaping (@escaping (State?, State) -> Swift.Void) -> Swift.Void)
+  public func select<Substate>(_ selector: @escaping (State) -> Substate) -> YCReSwift.Subscription<Substate>
+  public func select<Substate>(_ keyPath: Swift.KeyPath<State, Substate>) -> YCReSwift.Subscription<Substate>
+  public func skipRepeats(_ isRepeat: @escaping (State, State) -> Swift.Bool) -> YCReSwift.Subscription<State>
+  public var observer: ((State?, State) -> Swift.Void)?
+  @objc deinit
+}
+extension Subscription where State : Swift.Equatable {
+  public func skipRepeats() -> YCReSwift.Subscription<State>
+}
+extension Subscription {
+  public func skip(when: @escaping (State, State) -> Swift.Bool) -> YCReSwift.Subscription<State>
+  public func only(when: @escaping (State, State) -> Swift.Bool) -> YCReSwift.Subscription<State>
+}

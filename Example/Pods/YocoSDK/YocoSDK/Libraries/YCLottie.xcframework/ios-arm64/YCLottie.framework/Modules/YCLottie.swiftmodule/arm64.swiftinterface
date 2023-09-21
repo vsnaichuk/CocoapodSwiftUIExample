@@ -1,0 +1,611 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name YCLottie
+import CoreGraphics
+import CoreText
+import Foundation
+import QuartzCore
+import Swift
+import UIKit
+@_exported import YCLottie
+@objc @_inheritsConvenienceInitializers final public class AnimatedButton : YCLottie.AnimatedControl {
+  final public func setPlayRange(fromProgress: YCLottie.AnimationProgressTime, toProgress: YCLottie.AnimationProgressTime, event: UIKit.UIControl.Event)
+  final public func setPlayRange(fromMarker fromName: Swift.String, toMarker toName: Swift.String, event: UIKit.UIControl.Event)
+  override public init(animation: YCLottie.Animation)
+  @objc override dynamic public init()
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override final public func beginTracking(_ touch: UIKit.UITouch, with event: UIKit.UIEvent?) -> Swift.Bool
+  @objc override final public func endTracking(_ touch: UIKit.UITouch?, with event: UIKit.UIEvent?)
+  @objc deinit
+}
+@objc open class AnimatedControl : UIKit.UIControl {
+  final public let animationView: YCLottie.AnimationView
+  public var animation: YCLottie.Animation? {
+    get
+    set
+  }
+  public var animationSpeed: CoreGraphics.CGFloat {
+    get
+    set
+  }
+  public func setLayer(named: Swift.String, forState: UIKit.UIControl.State)
+  public func setValueProvider(_ valueProvider: YCLottie.AnyValueProvider, keypath: YCLottie.AnimationKeypath)
+  public init(animation: YCLottie.Animation)
+  @objc dynamic public init()
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override dynamic open var isEnabled: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc override dynamic open var isSelected: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc override dynamic open var isHighlighted: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc override dynamic open func beginTracking(_ touch: UIKit.UITouch, with event: UIKit.UIEvent?) -> Swift.Bool
+  @objc override dynamic open func continueTracking(_ touch: UIKit.UITouch, with event: UIKit.UIEvent?) -> Swift.Bool
+  @objc override dynamic open func endTracking(_ touch: UIKit.UITouch?, with event: UIKit.UIEvent?)
+  @objc override dynamic open func cancelTracking(with event: UIKit.UIEvent?)
+  @objc override dynamic open var intrinsicContentSize: CoreGraphics.CGSize {
+    @objc get
+  }
+  open func animationDidSet()
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers final public class AnimatedSwitch : YCLottie.AnimatedControl {
+  public enum CancelBehavior {
+    case reverse
+    case none
+    public static func == (a: YCLottie.AnimatedSwitch.CancelBehavior, b: YCLottie.AnimatedSwitch.CancelBehavior) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+  }
+  final public var isOn: Swift.Bool {
+    get
+    set
+  }
+  final public var cancelBehavior: YCLottie.AnimatedSwitch.CancelBehavior
+  final public func setIsOn(_ isOn: Swift.Bool, animated: Swift.Bool, shouldFireHaptics: Swift.Bool = true)
+  final public func setProgressForState(fromProgress: YCLottie.AnimationProgressTime, toProgress: YCLottie.AnimationProgressTime, forOnState: Swift.Bool)
+  override public init(animation: YCLottie.Animation)
+  @objc override dynamic public init()
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override final public func endTracking(_ touch: UIKit.UITouch?, with event: UIKit.UIEvent?)
+  override final public func animationDidSet()
+  @objc deinit
+}
+public enum CoordinateSpace : Swift.Int, Swift.Codable {
+  case type2d
+  case type3d
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+final public class Animation : Swift.Codable {
+  final public let startFrame: YCLottie.AnimationFrameTime
+  final public let endFrame: YCLottie.AnimationFrameTime
+  final public let framerate: Swift.Double
+  final public var markerNames: [Swift.String] {
+    get
+  }
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+  final public func encode(to encoder: Swift.Encoder) throws
+}
+public protocol AnimationCacheProvider {
+  func animation(forKey: Swift.String) -> YCLottie.Animation?
+  func setAnimation(_ animation: YCLottie.Animation, forKey: Swift.String)
+  func clearCache()
+}
+public typealias LottieCompletionBlock = (Swift.Bool) -> Swift.Void
+public protocol AnimationFontProvider {
+  func fontFor(family: Swift.String, size: CoreGraphics.CGFloat) -> CoreText.CTFont?
+}
+final public class DefaultFontProvider : YCLottie.AnimationFontProvider {
+  final public func fontFor(family: Swift.String, size: CoreGraphics.CGFloat) -> CoreText.CTFont?
+  public init()
+  @objc deinit
+}
+public protocol AnimationImageProvider {
+  func imageForAsset(asset: YCLottie.ImageAsset) -> CoreGraphics.CGImage?
+}
+public struct AnimationKeypath {
+  public init(keypath: Swift.String)
+  public init(keys: [Swift.String])
+}
+extension Animation {
+  public static func named(_ name: Swift.String, bundle: Foundation.Bundle = Bundle.main, subdirectory: Swift.String? = nil, animationCache: YCLottie.AnimationCacheProvider? = nil) -> YCLottie.Animation?
+  public static func filepath(_ filepath: Swift.String, animationCache: YCLottie.AnimationCacheProvider? = nil) -> YCLottie.Animation?
+  public typealias DownloadClosure = (YCLottie.Animation?) -> Swift.Void
+  public static func loadedFrom(url: Foundation.URL, closure: @escaping YCLottie.Animation.DownloadClosure, animationCache: YCLottie.AnimationCacheProvider?)
+  final public func progressTime(forMarker named: Swift.String) -> YCLottie.AnimationProgressTime?
+  final public func frameTime(forMarker named: Swift.String) -> YCLottie.AnimationFrameTime?
+  final public func progressTime(forFrame frameTime: YCLottie.AnimationFrameTime) -> YCLottie.AnimationProgressTime
+  final public func frameTime(forProgress progressTime: YCLottie.AnimationProgressTime) -> YCLottie.AnimationFrameTime
+  final public func time(forFrame frameTime: YCLottie.AnimationFrameTime) -> Foundation.TimeInterval
+  final public func frameTime(forTime time: Foundation.TimeInterval) -> YCLottie.AnimationFrameTime
+  final public var duration: Foundation.TimeInterval {
+    get
+  }
+  final public var bounds: CoreGraphics.CGRect {
+    get
+  }
+  final public var size: CoreGraphics.CGSize {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers final public class AnimationSubview : UIKit.UIView {
+  @objc deinit
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+}
+public protocol AnimationTextProvider : AnyObject {
+  func textFor(keypathName: Swift.String, sourceText: Swift.String) -> Swift.String
+}
+final public class DictionaryTextProvider : YCLottie.AnimationTextProvider {
+  public init(_ values: [Swift.String : Swift.String])
+  final public func textFor(keypathName: Swift.String, sourceText: Swift.String) -> Swift.String
+  @objc deinit
+}
+final public class DefaultTextProvider : YCLottie.AnimationTextProvider {
+  final public func textFor(keypathName: Swift.String, sourceText: Swift.String) -> Swift.String
+  public init()
+  @objc deinit
+}
+public typealias AnimationFrameTime = CoreGraphics.CGFloat
+public typealias AnimationProgressTime = CoreGraphics.CGFloat
+public enum LottieBackgroundBehavior {
+  case stop
+  case pause
+  case pauseAndRestore
+  case forceFinish
+  public static func == (a: YCLottie.LottieBackgroundBehavior, b: YCLottie.LottieBackgroundBehavior) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public enum LottieLoopMode {
+  case playOnce
+  case loop
+  case autoReverse
+  case `repeat`(Swift.Float)
+  case repeatBackwards(Swift.Float)
+}
+extension LottieLoopMode : Swift.Equatable {
+  public static func == (lhs: YCLottie.LottieLoopMode, rhs: YCLottie.LottieLoopMode) -> Swift.Bool
+}
+@objc @_inheritsConvenienceInitializers @IBDesignable final public class AnimationView : YCLottie.LottieView {
+  final public var animation: YCLottie.Animation? {
+    get
+    set
+  }
+  final public var backgroundBehavior: YCLottie.LottieBackgroundBehavior
+  final public var imageProvider: YCLottie.AnimationImageProvider {
+    get
+    set
+  }
+  final public var textProvider: YCLottie.AnimationTextProvider {
+    get
+    set
+  }
+  final public var fontProvider: YCLottie.AnimationFontProvider {
+    get
+    set
+  }
+  final public var isAnimationPlaying: Swift.Bool {
+    get
+  }
+  final public var isAnimationQueued: Swift.Bool {
+    get
+  }
+  final public var loopMode: YCLottie.LottieLoopMode {
+    get
+    set
+  }
+  final public var shouldRasterizeWhenIdle: Swift.Bool {
+    get
+    set
+  }
+  final public var currentProgress: YCLottie.AnimationProgressTime {
+    get
+    set
+  }
+  final public var currentTime: Foundation.TimeInterval {
+    get
+    set
+  }
+  final public var currentFrame: YCLottie.AnimationFrameTime {
+    get
+    set
+  }
+  final public var realtimeAnimationFrame: YCLottie.AnimationFrameTime {
+    get
+  }
+  final public var realtimeAnimationProgress: YCLottie.AnimationProgressTime {
+    get
+  }
+  final public var animationSpeed: CoreGraphics.CGFloat {
+    get
+    set
+  }
+  final public var respectAnimationFrameRate: Swift.Bool {
+    get
+    set
+  }
+  final public var viewportFrame: CoreGraphics.CGRect? {
+    get
+    set
+  }
+  final public func play(completion: YCLottie.LottieCompletionBlock? = nil)
+  final public func play(fromProgress: YCLottie.AnimationProgressTime? = nil, toProgress: YCLottie.AnimationProgressTime, loopMode: YCLottie.LottieLoopMode? = nil, completion: YCLottie.LottieCompletionBlock? = nil)
+  final public func play(fromFrame: YCLottie.AnimationFrameTime? = nil, toFrame: YCLottie.AnimationFrameTime, loopMode: YCLottie.LottieLoopMode? = nil, completion: YCLottie.LottieCompletionBlock? = nil)
+  final public func play(fromMarker: Swift.String? = nil, toMarker: Swift.String, loopMode: YCLottie.LottieLoopMode? = nil, completion: YCLottie.LottieCompletionBlock? = nil)
+  final public func stop()
+  final public func pause()
+  final public func reloadImages()
+  final public func forceDisplayUpdate()
+  final public func setValueProvider(_ valueProvider: YCLottie.AnyValueProvider, keypath: YCLottie.AnimationKeypath)
+  final public func getValue(for keypath: YCLottie.AnimationKeypath, atFrame: YCLottie.AnimationFrameTime?) -> Any?
+  final public func logHierarchyKeypaths()
+  final public func addSubview(_ subview: YCLottie.AnimationSubview, forLayerAt keypath: YCLottie.AnimationKeypath)
+  final public func convert(_ rect: CoreGraphics.CGRect, toLayerAt keypath: YCLottie.AnimationKeypath?) -> CoreGraphics.CGRect?
+  final public func convert(_ point: CoreGraphics.CGPoint, toLayerAt keypath: YCLottie.AnimationKeypath?) -> CoreGraphics.CGPoint?
+  final public func setNodeIsEnabled(isEnabled: Swift.Bool, keypath: YCLottie.AnimationKeypath)
+  final public func progressTime(forMarker named: Swift.String) -> YCLottie.AnimationProgressTime?
+  final public func frameTime(forMarker named: Swift.String) -> YCLottie.AnimationFrameTime?
+  public init(animation: YCLottie.Animation?, imageProvider: YCLottie.AnimationImageProvider? = nil, textProvider: YCLottie.AnimationTextProvider = DefaultTextProvider(), fontProvider: YCLottie.AnimationFontProvider = DefaultFontProvider())
+  @objc dynamic public init()
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  @objc override final public var intrinsicContentSize: CoreGraphics.CGSize {
+    @objc get
+  }
+  @objc deinit
+}
+extension AnimationView {
+  convenience public init(name: Swift.String, bundle: Foundation.Bundle = Bundle.main, imageProvider: YCLottie.AnimationImageProvider? = nil, animationCache: YCLottie.AnimationCacheProvider? = LRUAnimationCache.sharedCache)
+  convenience public init(filePath: Swift.String, imageProvider: YCLottie.AnimationImageProvider? = nil, animationCache: YCLottie.AnimationCacheProvider? = LRUAnimationCache.sharedCache)
+  convenience public init(url: Foundation.URL, imageProvider: YCLottie.AnimationImageProvider? = nil, closure: @escaping YCLottie.AnimationView.DownloadClosure, animationCache: YCLottie.AnimationCacheProvider? = LRUAnimationCache.sharedCache)
+  public typealias DownloadClosure = (Swift.Error?) -> Swift.Void
+}
+public protocol AnyValueProvider {
+  var valueType: Any.Type { get }
+  func hasUpdate(frame: YCLottie.AnimationFrameTime) -> Swift.Bool
+  func value(frame: YCLottie.AnimationFrameTime) -> Any
+}
+public class Asset : Swift.Codable {
+  final public let id: Swift.String
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public class BundleImageProvider : YCLottie.AnimationImageProvider {
+  public init(bundle: Foundation.Bundle, searchPath: Swift.String?)
+  public func imageForAsset(asset: YCLottie.ImageAsset) -> CoreGraphics.CGImage?
+  @objc deinit
+}
+public enum ColorFormatDenominator {
+  case One
+  case OneHundred
+  case TwoFiftyFive
+  public static func == (a: YCLottie.ColorFormatDenominator, b: YCLottie.ColorFormatDenominator) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public struct Color {
+  public var r: Swift.Double
+  public var g: Swift.Double
+  public var b: Swift.Double
+  public var a: Swift.Double
+  public init(r: Swift.Double, g: Swift.Double, b: Swift.Double, a: Swift.Double, denominator: YCLottie.ColorFormatDenominator = .One)
+}
+extension Color : Swift.Codable {
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+final public class ColorValueProvider : YCLottie.AnyValueProvider {
+  public typealias ColorValueBlock = (CoreGraphics.CGFloat) -> YCLottie.Color
+  final public var color: YCLottie.Color {
+    get
+    set
+  }
+  public init(block: @escaping YCLottie.ColorValueProvider.ColorValueBlock)
+  public init(_ color: YCLottie.Color)
+  final public var valueType: Any.Type {
+    get
+  }
+  final public func hasUpdate(frame: CoreGraphics.CGFloat) -> Swift.Bool
+  final public func value(frame: CoreGraphics.CGFloat) -> Any
+  @objc deinit
+}
+@objc final public class CompatibleAnimationKeypath : ObjectiveC.NSObject {
+  @objc public init(keypath: Swift.String)
+  @objc public init(keys: [Swift.String])
+  final public let animationKeypath: YCLottie.AnimationKeypath
+  @objc deinit
+  @objc override dynamic public init()
+}
+@objc final public class CompatibleAnimation : ObjectiveC.NSObject {
+  @objc public init(name: Swift.String, bundle: Foundation.Bundle = Bundle.main)
+  @objc deinit
+  @objc override dynamic public init()
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc final public class CompatibleAnimationView : UIKit.UIView {
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc final public var compatibleAnimation: YCLottie.CompatibleAnimation? {
+    @objc get
+    @objc set
+  }
+  @objc final public var loopAnimationCount: CoreGraphics.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc override final public var contentMode: UIKit.UIView.ContentMode {
+    @objc get
+    @objc set
+  }
+  @objc final public var shouldRasterizeWhenIdle: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc final public var currentProgress: CoreGraphics.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc final public var currentTime: Foundation.TimeInterval {
+    @objc get
+    @objc set
+  }
+  @objc final public var currentFrame: CoreGraphics.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc final public var realtimeAnimationFrame: CoreGraphics.CGFloat {
+    @objc get
+  }
+  @objc final public var realtimeAnimationProgress: CoreGraphics.CGFloat {
+    @objc get
+  }
+  @objc final public var animationSpeed: CoreGraphics.CGFloat {
+    @objc get
+    @objc set
+  }
+  @objc final public var respectAnimationFrameRate: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc final public var isAnimationPlaying: Swift.Bool {
+    @objc get
+  }
+  @objc final public func play()
+  @objc final public func play(completion: ((Swift.Bool) -> Swift.Void)?)
+  @objc final public func play(fromProgress: CoreGraphics.CGFloat, toProgress: CoreGraphics.CGFloat, completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  @objc final public func play(fromFrame: CoreGraphics.CGFloat, toFrame: CoreGraphics.CGFloat, completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  @objc final public func play(fromMarker: Swift.String, toMarker: Swift.String, completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  @objc final public func stop()
+  @objc final public func pause()
+  @objc final public func reloadImages()
+  @objc final public func forceDisplayUpdate()
+  @objc final public func getValue(for keypath: YCLottie.CompatibleAnimationKeypath, atFrame: CoreGraphics.CGFloat) -> Any?
+  @objc final public func logHierarchyKeypaths()
+  @objc final public func setColorValue(_ color: UIKit.UIColor, forKeypath keypath: YCLottie.CompatibleAnimationKeypath)
+  @objc final public func getColorValue(for keypath: YCLottie.CompatibleAnimationKeypath, atFrame: CoreGraphics.CGFloat) -> UIKit.UIColor?
+  @objc final public func addSubview(_ subview: YCLottie.AnimationSubview, forLayerAt keypath: YCLottie.CompatibleAnimationKeypath)
+  @objc final public func convert(rect: CoreGraphics.CGRect, toLayerAt keypath: YCLottie.CompatibleAnimationKeypath?) -> CoreGraphics.CGRect
+  @objc final public func convert(point: CoreGraphics.CGPoint, toLayerAt keypath: YCLottie.CompatibleAnimationKeypath?) -> CoreGraphics.CGPoint
+  @objc final public func progressTime(forMarker named: Swift.String) -> CoreGraphics.CGFloat
+  @objc final public func frameTime(forMarker named: Swift.String) -> CoreGraphics.CGFloat
+  @objc deinit
+}
+public class FilepathImageProvider : YCLottie.AnimationImageProvider {
+  public init(filepath: Swift.String)
+  public init(filepath: Foundation.URL)
+  public func imageForAsset(asset: YCLottie.ImageAsset) -> CoreGraphics.CGImage?
+  @objc deinit
+}
+final public class FloatValueProvider : YCLottie.AnyValueProvider {
+  public typealias CGFloatValueBlock = (CoreGraphics.CGFloat) -> CoreGraphics.CGFloat
+  final public var float: CoreGraphics.CGFloat {
+    get
+    set
+  }
+  public init(block: @escaping YCLottie.FloatValueProvider.CGFloatValueBlock)
+  public init(_ float: CoreGraphics.CGFloat)
+  final public var valueType: Any.Type {
+    get
+  }
+  final public func hasUpdate(frame: CoreGraphics.CGFloat) -> Swift.Bool
+  final public func value(frame: CoreGraphics.CGFloat) -> Any
+  @objc deinit
+}
+final public class GradientValueProvider : YCLottie.AnyValueProvider {
+  public typealias ColorsValueBlock = (CoreGraphics.CGFloat) -> [YCLottie.Color]
+  public typealias ColorLocationsBlock = (CoreGraphics.CGFloat) -> [Swift.Double]
+  final public var colors: [YCLottie.Color] {
+    get
+    set
+  }
+  final public var locations: [Swift.Double] {
+    get
+    set
+  }
+  public init(block: @escaping YCLottie.GradientValueProvider.ColorsValueBlock, locations: YCLottie.GradientValueProvider.ColorLocationsBlock? = nil)
+  public init(_ colors: [YCLottie.Color], locations: [Swift.Double] = [])
+  final public var valueType: Any.Type {
+    get
+  }
+  final public func hasUpdate(frame: CoreGraphics.CGFloat) -> Swift.Bool
+  final public func value(frame: CoreGraphics.CGFloat) -> Any
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers final public class ImageAsset : YCLottie.Asset {
+  final public let name: Swift.String
+  final public let directory: Swift.String
+  final public let width: Swift.Double
+  final public let height: Swift.Double
+  override final public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+extension CALayer {
+  public func logLayerTree(withIndent: Swift.Int = 0)
+}
+public enum LayerType : Swift.Int, Swift.Codable {
+  case precomp
+  case solid
+  case image
+  case null
+  case shape
+  case text
+  public init(from decoder: Swift.Decoder) throws
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum MatteType : Swift.Int, Swift.Codable {
+  case none
+  case add
+  case invert
+  case unknown
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum BlendMode : Swift.Int, Swift.Codable {
+  case normal
+  case multiply
+  case screen
+  case overlay
+  case darken
+  case lighten
+  case colorDodge
+  case colorBurn
+  case hardLight
+  case softLight
+  case difference
+  case exclusion
+  case hue
+  case saturation
+  case color
+  case luminosity
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers open class LottieView : UIKit.UIView {
+  @objc override dynamic open func didMoveToWindow()
+  @objc override dynamic open var contentMode: UIKit.UIView.ContentMode {
+    @objc get
+    @objc set
+  }
+  @objc override dynamic open func layoutSubviews()
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
+public class LRUAnimationCache : YCLottie.AnimationCacheProvider {
+  public init()
+  public func clearCache()
+  public static let sharedCache: YCLottie.LRUAnimationCache
+  public var cacheSize: Swift.Int
+  public func animation(forKey: Swift.String) -> YCLottie.Animation?
+  public func setAnimation(_ animation: YCLottie.Animation, forKey: Swift.String)
+  @objc deinit
+}
+infix operator +| : DefaultPrecedence
+infix operator +- : DefaultPrecedence
+final public class PointValueProvider : YCLottie.AnyValueProvider {
+  public typealias PointValueBlock = (CoreGraphics.CGFloat) -> CoreGraphics.CGPoint
+  final public var point: CoreGraphics.CGPoint {
+    get
+    set
+  }
+  public init(block: @escaping YCLottie.PointValueProvider.PointValueBlock)
+  public init(_ point: CoreGraphics.CGPoint)
+  final public var valueType: Any.Type {
+    get
+  }
+  final public func hasUpdate(frame: CoreGraphics.CGFloat) -> Swift.Bool
+  final public func value(frame: CoreGraphics.CGFloat) -> Any
+  @objc deinit
+}
+final public class SizeValueProvider : YCLottie.AnyValueProvider {
+  public typealias SizeValueBlock = (CoreGraphics.CGFloat) -> CoreGraphics.CGSize
+  final public var size: CoreGraphics.CGSize {
+    get
+    set
+  }
+  public init(block: @escaping YCLottie.SizeValueProvider.SizeValueBlock)
+  public init(_ size: CoreGraphics.CGSize)
+  final public var valueType: Any.Type {
+    get
+  }
+  final public func hasUpdate(frame: CoreGraphics.CGFloat) -> Swift.Bool
+  final public func value(frame: CoreGraphics.CGFloat) -> Any
+  @objc deinit
+}
+extension UIColor {
+  public var lottieColorValue: YCLottie.Color {
+    get
+  }
+}
+public struct Vector1D {
+  public init(_ value: Swift.Double)
+  public let value: Swift.Double
+}
+public struct Vector3D {
+  public let x: Swift.Double
+  public let y: Swift.Double
+  public let z: Swift.Double
+  public init(x: Swift.Double, y: Swift.Double, z: Swift.Double)
+}
+extension Vector1D : Swift.Codable {
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+extension Vector3D : Swift.Codable {
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+extension Vector3D {
+  public var pointValue: CoreGraphics.CGPoint {
+    get
+  }
+  public var sizeValue: CoreGraphics.CGSize {
+    get
+  }
+}
+extension YCLottie.AnimatedSwitch.CancelBehavior : Swift.Equatable {}
+extension YCLottie.AnimatedSwitch.CancelBehavior : Swift.Hashable {}
+extension YCLottie.CoordinateSpace : Swift.Equatable {}
+extension YCLottie.CoordinateSpace : Swift.Hashable {}
+extension YCLottie.CoordinateSpace : Swift.RawRepresentable {}
+extension YCLottie.LottieBackgroundBehavior : Swift.Equatable {}
+extension YCLottie.LottieBackgroundBehavior : Swift.Hashable {}
+extension YCLottie.ColorFormatDenominator : Swift.Equatable {}
+extension YCLottie.ColorFormatDenominator : Swift.Hashable {}
+extension YCLottie.LayerType : Swift.Equatable {}
+extension YCLottie.LayerType : Swift.Hashable {}
+extension YCLottie.LayerType : Swift.RawRepresentable {}
+extension YCLottie.MatteType : Swift.Equatable {}
+extension YCLottie.MatteType : Swift.Hashable {}
+extension YCLottie.MatteType : Swift.RawRepresentable {}
+extension YCLottie.BlendMode : Swift.Equatable {}
+extension YCLottie.BlendMode : Swift.Hashable {}
+extension YCLottie.BlendMode : Swift.RawRepresentable {}

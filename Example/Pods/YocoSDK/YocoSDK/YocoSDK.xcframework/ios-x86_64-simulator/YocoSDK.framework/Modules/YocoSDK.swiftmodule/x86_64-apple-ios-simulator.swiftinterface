@@ -1,0 +1,336 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
+// swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name YocoSDK
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation
+import CoreBluetooth
+import CoreLocation
+import Foundation
+import Ono
+import OnoSDK
+import Swift
+import UIKit
+import YCGloss
+import YCLottie
+import YCReSwift
+import YCSwiftSignatureView
+@_exported import YocoSDK
+import _Concurrency
+import _StringProcessing
+public enum SupportedCurrency : Swift.CaseIterable {
+  case mur
+  case zar
+  public var code: Swift.String {
+    get
+  }
+  public var symbol: Swift.String {
+    get
+  }
+  public static func == (a: YocoSDK.SupportedCurrency, b: YocoSDK.SupportedCurrency) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias AllCases = [YocoSDK.SupportedCurrency]
+  public static var allCases: [YocoSDK.SupportedCurrency] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum FlowType : Swift.CaseIterable {
+  case unknown
+  case pair
+  case charge
+  case refund
+  case print
+  public static func == (a: YocoSDK.FlowType, b: YocoSDK.FlowType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias AllCases = [YocoSDK.FlowType]
+  public static var allCases: [YocoSDK.FlowType] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum YocoPaymentType : Swift.CaseIterable {
+  case card
+  case cash
+  case qr
+  public static func == (a: YocoSDK.YocoPaymentType, b: YocoSDK.YocoPaymentType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias AllCases = [YocoSDK.YocoPaymentType]
+  public static var allCases: [YocoSDK.YocoPaymentType] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum ResultCode {
+  case success
+  case inProgress
+  case failure(Swift.String)
+  case cancelled
+  case permissionDenied
+  case noConnectivity
+  case invalidToken
+  case bluetoothDisabled
+  case cardMachineError
+  case printFailed
+}
+public enum Environment : Swift.CaseIterable {
+  case production
+  case staging
+  public static func stringToEnvironment(environment: Swift.String?) -> YocoSDK.Environment
+  public static func == (a: YocoSDK.Environment, b: YocoSDK.Environment) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public typealias AllCases = [YocoSDK.Environment]
+  public static var allCases: [YocoSDK.Environment] {
+    get
+  }
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum CorePaymentType : Swift.String, Swift.CaseIterable {
+  case charge
+  case refund
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [YocoSDK.CorePaymentType]
+  public typealias RawValue = Swift.String
+  public static var allCases: [YocoSDK.CorePaymentType] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+extension YocoSDK.ReceiptInfo : YCGloss.JSONDecodable {
+  public init?(json: YCGloss.JSON)
+}
+public struct MerchantInfo {
+  public init(merchantId: Swift.String, merchantName: Swift.String, phone: Swift.String, address: Swift.String)
+}
+public struct PaymentParameters {
+  public init(autoTransition: Swift.Bool = false, receiptDelegate: (any YocoSDK.YocoReceiptDelegate)?, userInfo: [Swift.AnyHashable : Any]? = nil, staffMember: YocoSDK.YocoStaff? = nil, receiptNumber: Swift.String? = nil, billId: Swift.String? = nil, note: Swift.String? = nil, pairingCompletionHandler: YocoSDK.YocoCompletionHandler<[Swift.String : Any]?>? = nil, transactionCompleteNotifier: YocoSDK.YocoCompletionHandler<YocoSDK.PaymentResult>? = nil)
+}
+public struct PaymentResult {
+  public let result: YocoSDK.ResultCode
+  public let amountInCents: Swift.Int64
+  public let tipInCents: Swift.Int?
+  public let finalAmountInCents: Swift.Int64
+  public let currency: YocoSDK.SupportedCurrency
+  public let paymentType: YocoSDK.YocoPaymentType?
+  public let transactionID: Swift.String
+  public let staffMember: YocoSDK.YocoStaff?
+  public let userInfo: [Swift.AnyHashable : Any]?
+  public let metaData: [Swift.String : Swift.String]?
+  public let receiptInfo: YocoSDK.ReceiptInfo?
+}
+public struct PaymentLookupResultError : Foundation.LocalizedError {
+  public let userDescription: Swift.String
+}
+public struct PaymentLookupResultNotFound : Foundation.LocalizedError {
+  public let userDescription: Swift.String
+}
+public class PrinterConfig {
+  final public let receiptType: YocoSDK.ReceiptCopyType
+  final public let autoPrint: Swift.Bool
+  final public let settingsAction: Swift.String?
+  final public let settingsRequestCode: Swift.Int?
+  public init(receiptType: YocoSDK.ReceiptCopyType = ReceiptCopyType.CUSTOMER, autoPrint: Swift.Bool = false, settingsAction: Swift.String? = nil, settingsRequestCode: Swift.Int? = nil)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class PrinterListener : Ono.OnoPrinterListener {
+  @objc public func onPrintFinished(printResult: Ono.OnoPrintResult)
+  @objc public func onPrinterStatusChanged(printerStatus: Ono.OnoPrinterStatus)
+  @objc deinit
+}
+public enum PrinterStatus {
+  case Busy
+  case Ready
+  case Faulty
+  case Unknown
+  case Printing
+  case NoDevice
+  case OutOfPaper
+  case OverHeating
+  case CheckingStatus
+  case PrintRequested
+  case PrintingComplete
+  case OtherError(_: Swift.Int? = nil)
+}
+public struct PrintParameters {
+}
+public struct PrintRequest {
+  public let printRequestId: Swift.String
+  public let clientTransactionId: Swift.String
+  public let printerConfig: YocoSDK.PrinterConfig
+  public let receiptInfo: YocoSDK.ReceiptInfo?
+  public let merchantInfo: YocoSDK.MerchantInfo
+  public let transactionType: YocoSDK.YocoTransactionType
+  public let receiptType: YocoSDK.ReceiptCopyType
+  public let signature: Foundation.Data?
+  public let metadata: [Swift.String : Swift.String]?
+  public init(printRequestId: Swift.String, clientTransactionId: Swift.String, printerConfig: YocoSDK.PrinterConfig, receiptInfo: YocoSDK.ReceiptInfo?, merchantInfo: YocoSDK.MerchantInfo, transactionType: YocoSDK.YocoTransactionType, receiptType: YocoSDK.ReceiptCopyType, signature: Foundation.Data?, metadata: [Swift.String : Swift.String]?)
+}
+public struct PrintResult {
+  public let printRequest: YocoSDK.PrintRequest?
+  public let completed: Swift.Bool
+  public let errorMessage: Swift.String?
+  public init(printRequest: YocoSDK.PrintRequest?, completed: Swift.Bool, errorMessage: Swift.String?)
+}
+public enum ReceiptCopyType {
+  case CUSTOMER
+  case MERCHANT
+  case BOTH
+  public static func == (a: YocoSDK.ReceiptCopyType, b: YocoSDK.ReceiptCopyType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct ReceiptInfo {
+  public let amountInCents: Swift.Int64?
+  public let tipInCents: Swift.Int?
+  public let finalAmountInCents: Swift.Int64?
+  public let type: YocoSDK.YocoPaymentType?
+  public let state: Swift.String?
+  public let statusText: Swift.String?
+  public let paymentScheme: Swift.String?
+  public let maskedAccountNumber: Ono.SensitiveString?
+  public let authorizationCode: Swift.String?
+  public let transactionIdentifier: Swift.String?
+  public let authorizationIdentifier: Swift.String?
+  public let merchantIdentifier: Swift.String?
+  public let terminalIdentifier: Swift.String?
+  public let entryMode: Swift.String?
+  public let applicationIdentifier: Swift.String?
+  public let cardholderVerificationResult: Swift.String?
+  public let retrievalReferenceNumber: Swift.String?
+  public let printForMerchantAndCustomer: Swift.Bool?
+  public let requiresSignature: Swift.Bool?
+  public let signatureText: Swift.String?
+  public let currency: Swift.String?
+  public let expiryYear: Ono.SensitiveString?
+  public let expiryMonth: Ono.SensitiveString?
+  public let transactionTime: Swift.String?
+  public let applicationName: Swift.String?
+}
+public struct RefundParameters {
+  public init(amountInCents: Swift.Int64? = nil, receiptDelegate: (any YocoSDK.YocoReceiptDelegate)?, userInfo: [Swift.AnyHashable : Any]? = nil, staffMember: YocoSDK.YocoStaff? = nil, refundCompleteNotifier: YocoSDK.YocoCompletionHandler<YocoSDK.PaymentResult>? = nil)
+}
+public struct YocoStaff {
+  public let name: Swift.String
+  public let staffNumber: Swift.String
+  public let userUUID: Swift.String?
+  public let userAuthentication: Swift.String?
+  public init(staffNumber: Swift.String, name: Swift.String, userUUID: Swift.String? = nil, userAuthentication: Swift.String? = nil)
+}
+@_hasMissingDesignatedInitializers public class TippingConfig {
+  public static let DO_NOT_ASK_FOR_TIP: YocoSDK.TippingConfig
+  public static let ASK_FOR_TIP_ON_CARD_MACHINE: YocoSDK.TippingConfig
+  public static func INCLUDE_TIP_IN_AMOUNT(tipInCents: Swift.Int32) -> YocoSDK.TippingConfig
+  public func askForTip() -> Swift.Bool
+  public func tipInCents() -> Swift.Int32?
+  @objc deinit
+}
+public enum SupportedReceiptType : Swift.String, Swift.CaseIterable {
+  case sms
+  case email
+  case print
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [YocoSDK.SupportedReceiptType]
+  public typealias RawValue = Swift.String
+  public static var allCases: [YocoSDK.SupportedReceiptType] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum ReceiptCellType : Swift.String, Swift.CaseIterable {
+  case InputCellType
+  case TextCellType
+  case PrintCellType
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [YocoSDK.ReceiptCellType]
+  public typealias RawValue = Swift.String
+  public static var allCases: [YocoSDK.ReceiptCellType] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum ReceiptState {
+  case initial
+  case inProgress(message: Swift.String? = nil)
+  case valid
+  case error(message: Swift.String)
+  case complete(message: Swift.String? = nil)
+}
+public protocol YocoReceiptDelegate : AnyObject {
+  func supportedReceiptTypes() -> [YocoSDK.SupportedReceiptType]
+  func sendSMSReceipt(phoneNumber: Swift.String, paymentResult: YocoSDK.PaymentResult, progress: @escaping YocoSDK.UpdateReceiptProgress)
+  func sendEmailReceipt(address: Swift.String, paymentResult: YocoSDK.PaymentResult, progress: @escaping YocoSDK.UpdateReceiptProgress)
+  func printReceipt(canPrintOnTerminal: Swift.Bool, message: Swift.String?, paymentResult: YocoSDK.PaymentResult, progress: @escaping YocoSDK.UpdateReceiptProgress)
+}
+extension YocoSDK.YocoReceiptDelegate {
+  public func sendSMSReceipt(phoneNumber: Swift.String, paymentResult: YocoSDK.PaymentResult, progress: @escaping YocoSDK.UpdateReceiptProgress)
+  public func sendEmailReceipt(address: Swift.String, paymentResult: YocoSDK.PaymentResult, progress: @escaping YocoSDK.UpdateReceiptProgress)
+  public func printReceipt(canPrintOnTerminal: Swift.Bool, message: Swift.String?, paymentResult: YocoSDK.PaymentResult, progress: @escaping YocoSDK.UpdateReceiptProgress)
+}
+public typealias UpdateReceiptProgress = (YocoSDK.ReceiptState) -> Swift.Void
+@_hasMissingDesignatedInitializers public class Yoco {
+  public static func initialise()
+  public static func configure(secret: Swift.String, loggingEnabled: Swift.Bool = false, environment: YocoSDK.Environment = .production, locale: Swift.String? = nil)
+  public static func configure(secret: Swift.String, apiToken: Swift.String, loggingEnabled: Swift.Bool = false, environment: YocoSDK.Environment = .production, locale: Swift.String? = nil)
+  @discardableResult
+  public static func charge(_ cents: Swift.UInt64, paymentType: YocoSDK.YocoPaymentType = .card, currency: YocoSDK.SupportedCurrency = .zar, tippingConfig: YocoSDK.TippingConfig = TippingConfig.DO_NOT_ASK_FOR_TIP, printerConfig: YocoSDK.PrinterConfig? = nil, parameters: YocoSDK.PaymentParameters? = nil, rootViewController: UIKit.UIViewController? = nil, completionHandler: YocoSDK.YocoCompletionHandler<YocoSDK.PaymentResult>? = nil) -> Swift.String
+  public static func pairTerminal(rootViewController: UIKit.UIViewController? = nil, userInfo: [Swift.AnyHashable : Any]? = nil, completionHandler: YocoSDK.YocoCompletionHandler<[Swift.String : Any]?>? = nil)
+  public static func unpairTerminal(userInfo: [Swift.AnyHashable : Any]? = nil)
+  public static func refund(transactionID: Swift.String, parameters: YocoSDK.RefundParameters? = nil, rootViewController: UIKit.UIViewController? = nil, completionHandler: YocoSDK.YocoCompletionHandler<YocoSDK.PaymentResult>? = nil)
+  public static func logout()
+  public static func getPaymentResult(transactionID: Swift.String, completionHandler: @escaping (YocoSDK.PaymentResult?, (any Swift.Error)?) -> Swift.Void)
+  public static func getIntegratorTransactions(receiptNumber: Swift.String, completionHandler: @escaping ([YocoSDK.PaymentResult]?, (any Swift.Error)?) -> Swift.Void)
+  public static func isLoggedIn() -> Swift.Bool
+  public static func showPaymentResult(_ paymentResult: YocoSDK.PaymentResult, paymentParameters: YocoSDK.PaymentParameters? = nil, rootViewController: UIKit.UIViewController? = nil, completionHandler: YocoSDK.YocoCompletionHandler<YocoSDK.PaymentResult>? = nil)
+  public static func applicationWillTerminate()
+  public static func printReceipt(printRequest: YocoSDK.PrintRequest, completionHandler: @escaping (YocoSDK.PrintResult?) -> Swift.Void)
+  public static func isPrinterAvailable(isPrinterAvailableCallback: @escaping (Swift.Bool, Swift.String?) -> Swift.Void)
+  public static func setPrinterConfig(printerConfig: YocoSDK.PrinterConfig)
+  public static func print(rootViewController: UIKit.UIViewController? = nil, printRequest: YocoSDK.PrintRequest, completionHandler: YocoSDK.YocoCompletionHandler<YocoSDK.PrintResult>?)
+  @objc deinit
+}
+public typealias YocoCompletionHandler<T> = (T) -> Swift.Void
+public enum YocoTransactionType {
+  case GOODS
+  case REFUND
+  public static func == (a: YocoSDK.YocoTransactionType, b: YocoSDK.YocoTransactionType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension YocoSDK.SupportedCurrency : Swift.Equatable {}
+extension YocoSDK.SupportedCurrency : Swift.Hashable {}
+extension YocoSDK.FlowType : Swift.Equatable {}
+extension YocoSDK.FlowType : Swift.Hashable {}
+extension YocoSDK.YocoPaymentType : Swift.Equatable {}
+extension YocoSDK.YocoPaymentType : Swift.Hashable {}
+extension YocoSDK.Environment : Swift.Equatable {}
+extension YocoSDK.Environment : Swift.Hashable {}
+extension YocoSDK.CorePaymentType : Swift.Equatable {}
+extension YocoSDK.CorePaymentType : Swift.Hashable {}
+extension YocoSDK.CorePaymentType : Swift.RawRepresentable {}
+extension YocoSDK.ReceiptCopyType : Swift.Equatable {}
+extension YocoSDK.ReceiptCopyType : Swift.Hashable {}
+extension YocoSDK.SupportedReceiptType : Swift.Equatable {}
+extension YocoSDK.SupportedReceiptType : Swift.Hashable {}
+extension YocoSDK.SupportedReceiptType : Swift.RawRepresentable {}
+extension YocoSDK.ReceiptCellType : Swift.Equatable {}
+extension YocoSDK.ReceiptCellType : Swift.Hashable {}
+extension YocoSDK.ReceiptCellType : Swift.RawRepresentable {}
+extension YocoSDK.YocoTransactionType : Swift.Equatable {}
+extension YocoSDK.YocoTransactionType : Swift.Hashable {}

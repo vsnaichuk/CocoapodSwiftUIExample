@@ -1,0 +1,11 @@
+framework module YCSwiftSignatureView {
+  umbrella header "SwiftSignatureView-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module YCSwiftSignatureView.Swift {
+    header "YCSwiftSignatureView-Swift.h"
+    requires objc
+}

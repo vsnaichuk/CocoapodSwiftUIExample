@@ -1,0 +1,8 @@
+${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh
+${PODS_XCFRAMEWORKS_BUILD_DIR}/YocoSDK/YocoSDK.framework/YocoSDK
+${PODS_XCFRAMEWORKS_BUILD_DIR}/YocoSDK/OnoSDK.framework/OnoSDK
+${PODS_XCFRAMEWORKS_BUILD_DIR}/YocoSDK/Ono.framework/Ono
+${PODS_XCFRAMEWORKS_BUILD_DIR}/YocoSDK/YCLottie.framework/YCLottie
+${PODS_XCFRAMEWORKS_BUILD_DIR}/YocoSDK/YCSwiftSignatureView.framework/YCSwiftSignatureView
+${PODS_XCFRAMEWORKS_BUILD_DIR}/YocoSDK/YCReSwift.framework/YCReSwift
+${PODS_XCFRAMEWORKS_BUILD_DIR}/YocoSDK/YCGloss.framework/YCGloss

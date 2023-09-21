@@ -1,0 +1,11 @@
+framework module YocoSDK {
+  umbrella header "YocoSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module YocoSDK.Swift {
+  header "YocoSDK-Swift.h"
+  requires objc
+}

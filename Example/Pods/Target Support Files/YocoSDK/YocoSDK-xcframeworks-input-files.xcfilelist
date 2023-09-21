@@ -1,0 +1,8 @@
+${PODS_ROOT}/Target Support Files/YocoSDK/YocoSDK-xcframeworks.sh
+${PODS_ROOT}/YocoSDK/YocoSDK/YocoSDK.xcframework
+${PODS_ROOT}/YocoSDK/OnoSDK/OnoSDK.xcframework
+${PODS_ROOT}/YocoSDK/OnoSDK/Ono.xcframework
+${PODS_ROOT}/YocoSDK/YocoSDK/Libraries/YCLottie.xcframework
+${PODS_ROOT}/YocoSDK/YocoSDK/Libraries/YCSwiftSignatureView.xcframework
+${PODS_ROOT}/YocoSDK/YocoSDK/Libraries/YCReSwift.xcframework
+${PODS_ROOT}/YocoSDK/YocoSDK/Libraries/YCGloss.xcframework

@@ -1,0 +1,11 @@
+framework module OnoSDK {
+  umbrella header "OnoSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module OnoSDK.Swift {
+  header "OnoSDK-Swift.h"
+  requires objc
+}
